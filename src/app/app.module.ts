@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { TestModule } from './test/test.module';
-import { TestDependency } from './test/test.service';
+import { TestDependency, TEST_DEPENDENCY } from './test/test.service';
 
 const dependency = {
   property: 'value'
@@ -18,9 +18,11 @@ console.log('[AppModule]', dependencyCopy);
   ],
   imports: [
     BrowserModule,
-    TestModule.forRoot(dependencyCopy)
+    TestModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    { provide: TEST_DEPENDENCY, useValue: dependency }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
