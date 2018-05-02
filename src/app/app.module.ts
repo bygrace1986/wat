@@ -9,7 +9,8 @@ import { TestDependency } from './test/test.service';
 const dependency = {
   property: 'value'
 } as TestDependency;
-console.log('[AppModule]', dependency);
+const dependencyCopy = { ...dependency };
+console.log('[AppModule]', dependencyCopy);
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ console.log('[AppModule]', dependency);
   ],
   imports: [
     BrowserModule,
-    TestModule.forRoot(dependency)
+    TestModule.forRoot(dependencyCopy)
   ],
   providers: [],
   bootstrap: [AppComponent]
