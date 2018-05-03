@@ -1,14 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, containerRefreshStart } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { TestModule } from './test/test.module';
-import { TestDependency } from './test/test.service';
+import { TestDependency, TEST_DEPENDENCY } from './test/test.service';
 
 const dependency = {
   property: 'value'
 } as TestDependency;
-const dependencyCopy = { ...dependency };
+const dependencyCopy = { id: 1, name: 'first', ...dependency };
+dependencyCopy.name = 'last';
 console.log('[AppModule]', dependencyCopy);
 
 @NgModule({
@@ -19,7 +20,9 @@ console.log('[AppModule]', dependencyCopy);
     BrowserModule,
     TestModule.forRoot(dependencyCopy)
   ],
-  providers: [],
+  providers: [
+    //{ provide: TEST_DEPENDENCY, useValue: dependencyCopy }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
